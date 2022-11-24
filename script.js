@@ -52,17 +52,14 @@ function readyFn() {
       $("div#hour-"+j).removeClass("past");
       $("div#hour-"+j).removeClass("present");
       $("div#hour-"+j).removeClass("future");
-      if(j > dayjs().format('H')) {
-        $("div#hour-"+j).addClass("future");
+      if(j < dayjs().format('H')) {
+        $("div#hour-"+j).addClass("past");
       }
-      else if(j = dayjs().format('H')) {
+      else if(j == dayjs().format('H')) {
         $("div#hour-"+j).addClass("present");
       }
-      else if(j = dayjs().format('H')) {
+      else if(j > dayjs().format('H')) {
         $("div#hour-"+j).addClass("future");
-      }
-      else {
-        console.log("Error");
       }
     }
   }
