@@ -41,22 +41,29 @@ function readyFn() {
     storeObject();
   }); 
   
-  console.log(dayjs().format('H'));
-  for(j = 9; j < 17; j++) {
-    $("div#hour-"+j).removeClass("past");
-    $("div#hour-"+j).removeClass("present");
-    $("div#hour-"+j).removeClass("future");
-    if(j > dayjs().format('H')) {
-      $("div#hour-"+j).addClass("future");
-    }
-    else if(j = dayjs().format('H')) {
-      $("div#hour-"+j).addClass("present");
-    }
-    else if(j = dayjs().format('H')) {
-      $("div#hour-"+j).addClass("future");
-    }
-    else {
-      console.log("Error");
+  colourCode();
+
+  // Update colour code every 10 seconds
+  setInterval(colourCode, 10000);
+
+  // Apply different colours for past, present and future intervals
+  function colourCode() {
+    for(j = 9; j < 17; j++) {
+      $("div#hour-"+j).removeClass("past");
+      $("div#hour-"+j).removeClass("present");
+      $("div#hour-"+j).removeClass("future");
+      if(j > dayjs().format('H')) {
+        $("div#hour-"+j).addClass("future");
+      }
+      else if(j = dayjs().format('H')) {
+        $("div#hour-"+j).addClass("present");
+      }
+      else if(j = dayjs().format('H')) {
+        $("div#hour-"+j).addClass("future");
+      }
+      else {
+        console.log("Error");
+      }
     }
   }
 
