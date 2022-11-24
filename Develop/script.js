@@ -1,11 +1,39 @@
 
-$( document ).ready( readyFn );
+$(document).ready(readyFn);
 
 function readyFn() {
 
-  $('#currentDay').text(dayjs().format('dddd, MMMM D YYYY'));
-  // var date = document.querySelector("#currentday");
-  // date.textContent = dayjs().format('dddd, MMMM D YYYY');
+  // Display today's date in header
+  $("#currentDay").text(dayjs().format("dddd, MMMM D YYYY"));
+
+  // Retreive stored data, if any
+  var storedEvents = JSON.parse(localStorage.getItem("localEvents"));
+  
+  // If data does not exist in local storage, create blank array object
+  if (storedEvents === null) {
+    storedEvents = {
+      hour9: "",
+      hour10: "",
+      hour11: "",
+      hour12: "",
+      hour13: "",
+      hour14: "",
+      hour15: "",
+      hour16: ""
+    };
+    storeObject();
+  }
+
+  function storeObject() {
+    // Store to localStorage
+    localStorage.setItem("localEvents", JSON.stringify(storedEvents));
+  }
+    
+  for(var i = 9; i < 17; i++) {
+    console.log(storedEvents["hour" + i]);
+    $("div#hour-"+i).children("textarea").text(storedEvents["hour" + i]);
+  }
+
 
 $(function () {
 
